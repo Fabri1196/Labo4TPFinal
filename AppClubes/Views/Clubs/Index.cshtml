@@ -1,0 +1,88 @@
+﻿@model AppClubes.ModelsView.ClubViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <p>
+        Filtros:<br />
+        Nombre: <input type="text" name="buscarNombre" value="@Model.buscarNombre" />
+        País: <input type="text" name="buscarPais" value="@Model.buscarPais" />
+        Categoría: <select name="Categoriaid" asp-items="@Model.ListaCategorias">
+            <option value="">Todas</option>
+        </select>
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+
+<a asp-action="Exportar">Exportar listado a CSV</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].resumen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].fechaFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].imagenEscudo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].pais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaClubes[0].categoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaClubes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.resumen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaFund)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.imagenEscudo))
+                    {
+                        <img src="~/fotos/@item.imagenEscudo" class="rounded-circle" style="max-width:50px" asp-append-version="true" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pais)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.categoria.descripcion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/js//preview.js"></script>
+
+<partial name="_paginador" for="@Model.paginador" />

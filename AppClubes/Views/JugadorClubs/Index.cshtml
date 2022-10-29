@@ -1,0 +1,67 @@
+﻿@model AppClubes.ModelsView.JugadorClubViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <p>
+        Filtros:<br />
+        Club: <select name="Clubid" asp-items="@Model.ListaClub">
+            <option value="">Todas</option>
+        </select>
+        Jugador: <select name="Jugadorid" asp-items="@Model.ListaJugador">
+            <option value="">Todas</option>
+        </select>
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadorClubes[0].club)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadorClubes[0].jugador.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadorClubes[0].jugador.nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaJugadorClubes)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.club.imagenEscudo))
+                    {
+                        <img src="~/fotos/@item.club.imagenEscudo" class="rounded-circle" style="max-width:50px" asp-append-version="true" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jugador.apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jugador.nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_paginador" for="@Model.paginador" />

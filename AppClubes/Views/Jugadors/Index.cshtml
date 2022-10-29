@@ -1,0 +1,75 @@
+﻿@model AppClubes.ModelsView.JugadorViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <p>
+        Filtros:<br />
+        Apellido: <input type="text" name="buscarNombre" value="@Model.buscarApellido" />
+        Nombre: <input type="text" name="buscarPais" value="@Model.buscarNombre" />
+        Biografía: <input type="text" name="buscarPais" value="@Model.buscarBiografia" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+
+<a asp-action="Exportar">Exportar listado a CSV</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadores[0].apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadores[0].nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadores[0].biografía)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaJugadores[0].foto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaJugadores)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.biografía)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.foto))
+                    {
+                        <img src="~/fotos/@item.foto" class="rounded-circle" style="max-width:50px" asp-append-version="true" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/js//preview.js"></script>
+
+<partial name="_paginador" for="@Model.paginador" />
