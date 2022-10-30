@@ -26,6 +26,16 @@ namespace AppClubes.Controllers
             this.env = env;
         }
 
+        public async Task<IActionResult> Home()
+        {
+            var applicationDbContext =
+                _context.club;
+
+            _context.SaveChanges();
+
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         public FileResult Exportar()
         {
             StringBuilder sb = new StringBuilder();

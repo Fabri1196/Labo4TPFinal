@@ -183,3 +183,4 @@ C:\Users\Usuario\Desktop\AppClubes\AppClubes\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Users\Usuario\Desktop\AppClubes\AppClubes\obj\Debug\netcoreapp3.1\Razor\Views\JugadorClubs\Edit.cshtml.g.cs
 C:\Users\Usuario\Desktop\AppClubes\AppClubes\obj\Debug\netcoreapp3.1\Razor\Views\JugadorClubs\Index.cshtml.g.cs
 C:\Users\Usuario\Desktop\AppClubes\AppClubes\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_paginador.cshtml.g.cs
+C:\Users\Usuario\Desktop\AppClubes\AppClubes\obj\Debug\netcoreapp3.1\Razor\Views\Clubs\Home.cshtml.g.cs

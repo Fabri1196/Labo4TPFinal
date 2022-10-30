@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AppClubes.Models.Club>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>El Mundo del Futbol</h1>
+
+
+<div class="d-inline-flex p-2 bd-highlight justify-content-between flex-wrap" style="width:100%">
+
+    @foreach (var item in Model)
+    {
+        @if (!string.IsNullOrEmpty(@item.imagenEscudo))
+        {
+    <div class="card m-2" style="width: 16rem">
+        <div class="d-flex align-items-center justify-content-center" style="height: 280px;">
+            <a asp-action="Details" asp-route-id="@item.id">
+                <img src="~/fotos/@item.imagenEscudo" alt="@item.nombre" class="card-img-top" style="max-height:400px;" asp-append-version="true" />
+            </a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.nombre</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.fechaFund.ToString("MM-dd-yyyy")</h5>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+            <a asp-action="Details" asp-route-id="@item.id" class="btn btn-primary">Detalles</a>
+        </div>
+    </div>
+        }
+    }
+</div>
